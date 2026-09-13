@@ -13,7 +13,7 @@ export function renderTopics(root) {
     <div class="page-head">
       <div class="eyebrow">Curriculum</div>
       <h1>The ten topic areas</h1>
-      <p class="lede">Exam weights shown are the published ranges for the current Level I curriculum. Topics marked <em>Full content</em> have complete lessons; the others carry orientation lessons, formulas and practice questions while the remaining material is written.</p>
+      <p class="lede">Exam weights shown are the published ranges for the current Level I curriculum. Each topic is organised into modules, with lessons, formulas, flashcards and practice questions at four difficulty levels.</p>
     </div>
     ${CURRICULUM.map((t) => {
       const s = statsFor(questionsForTopic(t.id));
@@ -21,9 +21,7 @@ export function renderTopics(root) {
       return `
         <a class="topic-row" href="#/topic/${t.id}">
           <div class="topic-main">
-            <div class="topic-name">${esc(t.name)}
-              ${t.depth === 'deep' ? '<span class="pill pill-accent">Full content</span>' : ''}
-            </div>
+            <div class="topic-name">${esc(t.name)}</div>
             <div class="topic-meta">${esc(t.weight)} of exam · ${t.modules.length} modules · ${lessons} lessons · ${s.total} questions</div>
           </div>
           <div class="topic-side">

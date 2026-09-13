@@ -20,11 +20,53 @@ export const CURRICULUM = [
   equity, fixedincome, derivatives, alternatives, portfolio,
 ];
 
+/* ---------------- answer-position balancing ---------------- */
+
+// Authored questions put the correct answer in B far more often than C, which
+// rewards guessing. Each question gets a stable pseudo-random choice order
+// seeded by its id, and the leading letters in its "why" notes are remapped.
+function seededOrder(id, n) {
+  let h = 2166136261;
+  for (let i = 0; i < id.length; i++) { h ^= id.charCodeAt(i); h = Math.imul(h, 16777619); }
+  const rand = () => {
+    h = (h + 0x6d2b79f5) | 0;
+    let t = Math.imul(h ^ (h >>> 15), 1 | h);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const order = [...Array(n).keys()];
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
+}
+
+const LETTERS = 'ABC';
+
+function arrange(q) {
+  const order = seededOrder(q.id, q.choices.length);   // order[newPos] = oldPos
+  const newPosOf = (oldPos) => order.indexOf(oldPos);
+  const remap = (letter) => LETTERS[newPosOf(LETTERS.indexOf(letter))];
+
+  const why = (q.why || [])
+    .map((w) => w.replace(/^([ABC])(?: and ([ABC]))?\b/, (_, a, b) =>
+      b ? [remap(a), remap(b)].sort().join(' and ') : remap(a)))
+    .sort((x, y) => x.localeCompare(y));
+
+  return {
+    ...q,
+    choices: order.map((oldPos) => q.choices[oldPos]),
+    answer: newPosOf(q.answer),
+    why,
+  };
+}
+
 /* ---------------- flattening helpers ---------------- */
 
 const withContext = (topic) =>
   topic.modules.flatMap((m) =>
-    (m.questions || []).map((q) => ({ ...q, topicId: topic.id, topicName: topic.name, moduleId: m.id, moduleName: m.name }))
+    (m.questions || []).map((q) => ({ ...arrange(q), topicId: topic.id, topicName: topic.name, moduleId: m.id, moduleName: m.name }))
   );
 
 export const ALL_QUESTIONS = CURRICULUM.flatMap(withContext);

@@ -40,24 +40,29 @@ enable Pages on the `main` branch, root folder. No configuration needed.
 Progress is stored in your browser's `localStorage`. It is private to the device
 and browser you use, and never leaves your machine.
 
-## Content status
+## Content
 
-| Topic | Exam weight | Depth |
-|---|---|---|
-| Ethical and Professional Standards | 15–20% | Full lessons |
-| Quantitative Methods | 6–9% | Full lessons |
-| Economics | 6–9% | Orientation lessons |
-| Financial Statement Analysis | 11–14% | Orientation lessons |
-| Corporate Issuers | 6–9% | Orientation lessons |
-| Equity Investments | 11–14% | Orientation lessons |
-| Fixed Income | 11–14% | Orientation lessons |
-| Derivatives | 5–8% | Orientation lessons |
-| Alternative Investments | 7–10% | Orientation lessons |
-| Portfolio Management | 8–12% | Orientation lessons |
+| Topic | Exam weight | Modules | Lessons | Questions | Cards | Formulas |
+|---|---|---|---|---|---|---|
+| Ethical and Professional Standards | 15–20% | 6 | 8 | 21 | 31 | — |
+| Quantitative Methods | 6–9% | 6 | 7 | 28 | 27 | 26 |
+| Economics | 6–9% | 8 | 9 | 34 | 39 | 20 |
+| Financial Statement Analysis | 11–14% | 10 | 13 | 46 | 47 | 34 |
+| Corporate Issuers | 6–9% | 7 | 8 | 32 | 32 | 15 |
+| Equity Investments | 11–14% | 7 | 9 | 29 | 31 | 16 |
+| Fixed Income | 11–14% | 10 | 11 | 48 | 46 | 32 |
+| Derivatives | 5–8% | 7 | 9 | 29 | 28 | 16 |
+| Alternative Investments | 7–10% | 7 | 8 | 30 | 31 | 9 |
+| Portfolio Management | 8–12% | 6 | 6 | 29 | 28 | 12 |
+| **Total** | | **74** | **88** | **326** | **340** | **180** |
 
-Every topic has lessons, formulas, flashcards and practice questions. The two
-marked *Full lessons* are built out module by module; the rest currently carry
-one orientation lesson per module, and are being deepened over time.
+Modules follow the structure of the current Level I curriculum, with closely
+related curriculum readings combined where that reads better. Every question
+has a difficulty level and explains why each wrong answer fails.
+
+Answer positions are balanced at load time: each question gets a stable
+choice order seeded by its id (`arrange()` in `js/content/index.js`), so authors
+can write the correct answer in any position without creating a guessable bias.
 
 ## Project structure
 

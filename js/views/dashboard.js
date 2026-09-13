@@ -77,9 +77,7 @@ export function renderDashboard(root) {
       ${topicRows.map(({ t, s }) => `
         <a class="topic-row" href="#/topic/${t.id}">
           <div class="topic-main">
-            <div class="topic-name">${esc(t.name)}
-              ${t.depth === 'deep' ? '<span class="pill pill-accent">Full content</span>' : ''}
-            </div>
+            <div class="topic-name">${esc(t.name)}</div>
             <div class="topic-meta">${esc(t.weight)} of exam · ${s.seen}/${s.total} questions seen${s.accuracy !== null ? ` · ${s.accuracy}% accuracy` : ''}</div>
           </div>
           <div class="topic-side">
