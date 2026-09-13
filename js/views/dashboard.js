@@ -3,6 +3,7 @@
 import { CURRICULUM, ALL_QUESTIONS, questionsForTopic, ALL_CARDS } from '../content/index.js';
 import { statsFor, streak, answeredToday, recentDays, dueCountSoon, dueCards, cardStat, getState } from '../store.js';
 import { esc, pct, bar } from '../util.js';
+import { nextLessonOverall } from './curriculum.js';
 
 export function renderDashboard(root) {
   const overall = statsFor(ALL_QUESTIONS);
@@ -12,6 +13,7 @@ export function renderDashboard(root) {
   const days = recentDays(14);
   const maxDay = Math.max(1, ...days.map((d) => d.answered));
   const lessonsDone = Object.keys(getState().lessons).length;
+  const resume = nextLessonOverall();
 
   const topicRows = CURRICULUM.map((t) => {
     const qs = questionsForTopic(t.id);
@@ -43,13 +45,22 @@ export function renderDashboard(root) {
 
     <div class="section">
       <div class="section-head"><h2>Start here</h2></div>
+      ${resume ? `
+        <a class="topic-row resume" href="#/lesson/${resume.topic.id}/${resume.module.id}/${resume.lesson.id}" style="margin-bottom:12px">
+          <div class="topic-main">
+            <div class="eyebrow" style="margin-bottom:2px">${lessonsDone ? 'Continue learning' : 'Start learning'}</div>
+            <div class="topic-name">${esc(resume.lesson.title)}</div>
+            <div class="topic-meta">${esc(resume.topic.name)} · ${esc(resume.module.name)} · ${resume.lesson.minutes} min read</div>
+          </div>
+          <div class="topic-side"><span class="btn btn-primary btn-sm">Open →</span></div>
+        </a>` : ''}
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(330px,1fr))">
         ${actionCard('#/review', 'Review due items', due || cardsDue
           ? `${due} question${due === 1 ? '' : 's'} and ${cardsDue} card${cardsDue === 1 ? '' : 's'} are scheduled.`
           : 'Nothing scheduled — answer some questions to build the queue.', due + cardsDue > 0)}
         ${actionCard('#/practice', 'Practice questions', 'Choose topics and difficulty, from Easy to Very Hard.', true)}
         ${actionCard('#/mock', 'Timed mock exam', 'Exam-weighted question mix against the clock.', true)}
-        ${actionCard('#/topics', 'Study the curriculum', `${lessonsDone} lesson${lessonsDone === 1 ? '' : 's'} read so far.`, true)}
+        ${actionCard('#/topics', 'Browse all lessons', `${lessonsDone} lesson${lessonsDone === 1 ? '' : 's'} read so far.`, true)}
       </div>
     </div>
 

@@ -153,6 +153,14 @@ export function markLesson(id) {
 
 export const lessonDone = (id) => Boolean(state.lessons[id]);
 
+// The lesson most recently opened, so "Continue learning" can resume it.
+export function setLastLesson(topicId, moduleId, lessonId) {
+  state.lastLesson = { topicId, moduleId, lessonId };
+  save();
+}
+
+export const getLastLesson = () => state.lastLesson || null;
+
 /* ---------------- mocks ---------------- */
 
 export function recordMock(result) {

@@ -95,6 +95,14 @@ export function getLesson(topicId, moduleId, lessonId) {
   return getModule(topicId, moduleId)?.lessons?.find((l) => l.id === lessonId);
 }
 
+/** Every lesson in a topic, in reading order, with its module attached. */
+export function lessonPath(topicId) {
+  const topic = getTopic(topicId);
+  if (!topic) return [];
+  return topic.modules.flatMap((m, mi) =>
+    (m.lessons || []).map((l, li) => ({ topic, module: m, lesson: l, moduleIndex: mi, lessonIndex: li })));
+}
+
 export const questionsForTopic = (id) => ALL_QUESTIONS.filter((q) => q.topicId === id);
 export const questionsForModule = (id) => ALL_QUESTIONS.filter((q) => q.moduleId === id);
 

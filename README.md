@@ -25,8 +25,12 @@ enable Pages on the `main` branch, root folder. No configuration needed.
 
 ## What's in it
 
-- **Lessons** — original teaching material organised by topic → module → lesson,
-  with worked examples, formula callouts and comparison tables.
+- **Learn** — original teaching material organised by topic → module → lesson.
+  Each topic page is a learning path with a "Continue" button that resumes where
+  you left off. Economics is taught in full depth: 35 lessons with diagrams,
+  worked examples you reveal one step at a time, "check yourself" questions
+  inside the lesson, and key takeaways. Lessons are marked read when you reach
+  the end.
 - **Practice** — build a question set by topic and difficulty (Easy / Medium /
   Hard / Very Hard). Adaptive ordering puts previously missed and unseen
   questions from your weakest topics first.
@@ -50,7 +54,7 @@ and browser you use, and never leaves your machine.
 |---|---|---|---|---|---|---|
 | Ethical and Professional Standards | 15–20% | 6 | 8 | 21 | 31 | — |
 | Quantitative Methods | 6–9% | 6 | 7 | 28 | 27 | 26 |
-| Economics | 6–9% | 8 | 9 | 34 | 39 | 20 |
+| Economics | 6–9% | 8 | 35 | 56 | 69 | 31 |
 | Financial Statement Analysis | 11–14% | 10 | 13 | 46 | 47 | 34 |
 | Corporate Issuers | 6–9% | 7 | 8 | 32 | 32 | 15 |
 | Equity Investments | 11–14% | 7 | 9 | 29 | 31 | 16 |
@@ -58,7 +62,7 @@ and browser you use, and never leaves your machine.
 | Derivatives | 5–8% | 7 | 9 | 29 | 28 | 16 |
 | Alternative Investments | 7–10% | 7 | 8 | 30 | 31 | 9 |
 | Portfolio Management | 8–12% | 6 | 6 | 29 | 28 | 12 |
-| **Total** | | **74** | **88** | **326** | **340** | **180** |
+| **Total** | | **74** | **114** | **348** | **370** | **191** |
 
 Modules follow the structure of the current Level I curriculum, with closely
 related curriculum readings combined where that reads better. Every question
@@ -104,8 +108,13 @@ Each topic file exports a single object. To add questions, append to a module's
 }
 ```
 
-Lessons use typed content blocks (`p`, `h`, `ul`, `ol`, `formula`, `callout`,
-`example`, `table`) rendered by `js/render.js`.
+Lessons use typed content blocks rendered by `js/render.js`: `p`, `h`, `h3`,
+`ul`, `ol`, `formula`, `callout`, `example`, `table`, plus the teaching blocks
+`terms` (definitions), `flow` (cause-and-effect chain), `quad` (2×2 framework),
+`plot` (a diagram drawn from functions, lines and shaded areas), `steps` (a
+worked example revealed step by step), `check` (an in-lesson question) and
+`takeaways`. Large topics can split modules into separate files — see
+`js/content/economics/`.
 
 ## Keyboard shortcuts
 
