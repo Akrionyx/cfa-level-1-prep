@@ -3,6 +3,10 @@
 An interactive, adaptive study app covering all ten topic areas of the CFA Level I
 curriculum. Minimalist, dependency-free, and runs entirely in the browser.
 
+**Live:** <https://akrionyx.github.io/cfa-level-1-prep/>
+
+Pushing to `main` redeploys the site automatically via GitHub Pages.
+
 ## Running it
 
 No build step and no dependencies. Serve the folder over HTTP:
